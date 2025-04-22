@@ -1,4 +1,4 @@
-# Digital Data Analysis
+# Digital Marketing Data Analysis
 
 A data analysis project for analyzing digital marketing and customer data.
 
