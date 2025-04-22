@@ -1,0 +1,418 @@
+{% extends 'data_dashboard/base.html' %}
+
+{% block title %}Digital Data Analysis Dashboard{% endblock %}
+
+{% block extra_css %}
+<style>
+    .kpi-card {
+        padding: 15px;
+        border-radius: 8px;
+        margin-bottom: 15px;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    .kpi-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    }
+    .kpi-value {
+        font-size: 24px;
+        font-weight: bold;
+    }
+    .kpi-label {
+        font-size: 14px;
+        color: #6c757d;
+    }
+    .tab-pane {
+        padding: 20px 0;
+    }
+    .section-title {
+        margin-bottom: 20px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid #dee2e6;
+    }
+    .chart-wrapper {
+        background: white;
+        border-radius: 8px;
+        padding: 15px;
+        margin-bottom: 20px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    }
+    .placeholder-notice {
+        background-color: #ffeeba;
+        color: #856404;
+        padding: 10px;
+        border-radius: 5px;
+        margin-bottom: 15px;
+    }
+    .data-table {
+        font-size: 14px;
+    }
+    .filter-section {
+        background: #f8f9fa;
+        padding: 15px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="dashboard-header">
+    <h1>Digital Marketing Performance Dashboard</h1>
+    <p class="lead">Comprehensive view of marketing performance, customer insights, and budget optimization</p>
+</div>
+
+<!-- Filter Section (placeholder for now) -->
+<div class="filter-section">
+    <div class="row">
+        <div class="col-md-4">
+            <label for="dateRange" class="form-label">Date Range</label>
+            <select class="form-select" id="dateRange">
+                <option value="last7">Last 7 Days</option>
+                <option value="last30" selected>Last 30 Days</option>
+                <option value="last90">Last 90 Days</option>
+                <option value="ytd">Year to Date</option>
+                <option value="custom">Custom Range</option>
+            </select>
+        </div>
+        <div class="col-md-4">
+            <label for="channelFilter" class="form-label">Channels</label>
+            <select class="form-select" id="channelFilter" multiple>
+                <option value="all" selected>All Channels</option>
+                <option value="facebook">Facebook</option>
+                <option value="instagram">Instagram</option>
+                <option value="google">Google Ads</option>
+                <option value="organic">Organic</option>
+                <option value="direct">Direct</option>
+            </select>
+        </div>
+        <div class="col-md-4 d-flex align-items-end">
+            <button type="button" class="btn btn-primary mb-3">Apply Filters</button>
+        </div>
+    </div>
+</div>
+
+<!-- KPI Cards Section -->
+<div class="row mb-4">
+    <div class="col-md-3">
+        <div class="kpi-card bg-light">
+            <div class="kpi-label">Total Revenue</div>
+            <div class="kpi-value">{{ overall_kpis.Total_Revenue }}</div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="kpi-card bg-light">
+            <div class="kpi-label">Blended ROAS</div>
+            <div class="kpi-value">{{ overall_kpis.Blended_ROAS }}</div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="kpi-card bg-light">
+            <div class="kpi-label">Total Ad Spend</div>
+            <div class="kpi-value">{{ overall_kpis.Total_Ad_Spend }}</div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="kpi-card bg-light">
+            <div class="kpi-label">Total Conversions</div>
+            <div class="kpi-value">{{ overall_kpis.Total_Transactions }}</div>
+        </div>
+    </div>
+</div>
+
+<div class="row mb-4">
+    <div class="col-md-3">
+        <div class="kpi-card bg-light">
+            <div class="kpi-label">Average Order Value</div>
+            <div class="kpi-value">{{ overall_kpis.AOV }}</div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="kpi-card bg-light">
+            <div class="kpi-label">Customer Acquisition Cost</div>
+            <div class="kpi-value">{{ overall_kpis.CAC }}</div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="kpi-card bg-light">
+            <div class="kpi-label">Lifetime Value</div>
+            <div class="kpi-value">{{ overall_kpis.LTV_Proxy }}</div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="kpi-card bg-light">
+            <div class="kpi-label">Total Sessions</div>
+            <div class="kpi-value">{{ overall_kpis.Total_Sessions }}</div>
+        </div>
+    </div>
+</div>
+
+<!-- Main Dashboard Tabs -->
+<ul class="nav nav-tabs" id="dashboardTabs" role="tablist">
+    <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="overview-tab" data-bs-toggle="tab" data-bs-target="#overview" type="button" role="tab" aria-controls="overview" aria-selected="true">Overview</button>
+    </li>
+    <li class="nav-item" role="presentation">
+        <button class="nav-link" id="audience-tab" data-bs-toggle="tab" data-bs-target="#audience" type="button" role="tab" aria-controls="audience" aria-selected="false">Audience</button>
+    </li>
+    <li class="nav-item" role="presentation">
+        <button class="nav-link" id="acquisition-tab" data-bs-toggle="tab" data-bs-target="#acquisition" type="button" role="tab" aria-controls="acquisition" aria-selected="false">Acquisition</button>
+    </li>
+    <li class="nav-item" role="presentation">
+        <button class="nav-link" id="attribution-tab" data-bs-toggle="tab" data-bs-target="#attribution" type="button" role="tab" aria-controls="attribution" aria-selected="false">Attribution</button>
+    </li>
+    <li class="nav-item" role="presentation">
+        <button class="nav-link" id="cohorts-tab" data-bs-toggle="tab" data-bs-target="#cohorts" type="button" role="tab" aria-controls="cohorts" aria-selected="false">Cohorts</button>
+    </li>
+    <li class="nav-item" role="presentation">
+        <button class="nav-link" id="forecast-tab" data-bs-toggle="tab" data-bs-target="#forecast" type="button" role="tab" aria-controls="forecast" aria-selected="false">Forecast</button>
+    </li>
+    <li class="nav-item" role="presentation">
+        <button class="nav-link" id="budget-tab" data-bs-toggle="tab" data-bs-target="#budget" type="button" role="tab" aria-controls="budget" aria-selected="false">Budget</button>
+    </li>
+</ul>
+
+<div class="tab-content" id="dashboardTabsContent">
+    <!-- Overview Tab -->
+    <div class="tab-pane fade show active" id="overview" role="tabpanel" aria-labelledby="overview-tab">
+        <h3 class="section-title">Performance Overview</h3>
+        
+        <div class="row">
+            <div class="col-md-12">
+                <div class="chart-wrapper">
+                    <h5>Sessions & Transactions Over Time</h5>
+                    {{ charts.daily_trends|safe }}
+                </div>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-6">
+                <div class="chart-wrapper">
+                    <h5>Ad Performance Trends</h5>
+                    {{ charts.daily_ads|safe }}
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="chart-wrapper">
+                    <h5>Platform ROAS Comparison</h5>
+                    {{ charts.platform_roas|safe }}
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Audience Tab -->
+    <div class="tab-pane fade" id="audience" role="tabpanel" aria-labelledby="audience-tab">
+        <h3 class="section-title">Audience Insights</h3>
+        
+        <div class="row">
+            <div class="col-md-6">
+                <div class="chart-wrapper">
+                    <h5>Customer Segments</h5>
+                    {{ charts.customer_segments|safe }}
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="chart-wrapper">
+                    <h5>Age Distribution</h5>
+                    {{ charts.age_distribution|safe }}
+                </div>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-12">
+                <div class="chart-wrapper">
+                    <h5>Loyalty Tier Analysis</h5>
+                    {{ charts.loyalty_tier|safe }}
+                    
+                    <div class="mt-4">
+                        <h6>Loyalty Tier Details</h6>
+                        <div class="table-responsive">
+                            <table class="table table-sm table-hover data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Loyalty Tier</th>
+                                        <th>Average Spend</th>
+                                        <th>Average Orders</th>
+                                        <th>Customer Count</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for row in customer_results.loyalty_analysis_data %}
+                                    <tr>
+                                        <td>{{ row.loyalty_tier }}</td>
+                                        <td>${{ row.Average_Spend|floatformat:2 }}</td>
+                                        <td>{{ row.Average_Orders|floatformat:1 }}</td>
+                                        <td>{{ row.Customer_Count }}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Acquisition Tab -->
+    <div class="tab-pane fade" id="acquisition" role="tabpanel" aria-labelledby="acquisition-tab">
+        <h3 class="section-title">Acquisition Channels</h3>
+        
+        <div class="row">
+            <div class="col-md-6">
+                <div class="chart-wrapper">
+                    <h5>Sessions by Source</h5>
+                    {{ charts.sessions_source|safe }}
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="chart-wrapper">
+                    <h5>Device Distribution</h5>
+                    {{ charts.device_sessions|safe }}
+                </div>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-12">
+                <div class="chart-wrapper">
+                    <h5>Ad Platform Performance</h5>
+                    {{ charts.spend_value|safe }}
+                    
+                    <div class="mt-4">
+                        <h6>Platform Metrics</h6>
+                        <div class="table-responsive">
+                            <table class="table table-sm table-hover data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Platform</th>
+                                        <th>Spend</th>
+                                        <th>Conversions</th>
+                                        <th>Conversion Value</th>
+                                        <th>ROAS</th>
+                                        <th>CPA</th>
+                                        <th>CVR (%)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for row in ad_results.platform_summary_data %}
+                                    <tr>
+                                        <td>{{ row.platform }}</td>
+                                        <td>${{ row.Spend|floatformat:2 }}</td>
+                                        <td>{{ row.Conversions|floatformat:0 }}</td>
+                                        <td>${{ row.Conversion_Value|floatformat:2 }}</td>
+                                        <td>{{ row.ROAS|floatformat:2 }}</td>
+                                        <td>${{ row.CPA|floatformat:2 }}</td>
+                                        <td>{{ row.CVR|floatformat:2 }}%</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Attribution Tab -->
+    <div class="tab-pane fade" id="attribution" role="tabpanel" aria-labelledby="attribution-tab">
+        <h3 class="section-title">Marketing Attribution</h3>
+        
+        <div class="placeholder-notice">
+            <strong>Feature in Development:</strong> Advanced attribution modeling is coming soon. This will include first-touch, last-touch, Markov Chain, and Shapley Value attribution models.
+        </div>
+        
+        <div class="row">
+            <div class="col-md-12">
+                <div class="chart-wrapper">
+                    <h5>Customer Journey Flow (Sankey Diagram)</h5>
+                    {{ charts.sankey|safe }}
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Cohorts Tab -->
+    <div class="tab-pane fade" id="cohorts" role="tabpanel" aria-labelledby="cohorts-tab">
+        <h3 class="section-title">Cohort Analysis</h3>
+        
+        <div class="placeholder-notice">
+            <strong>Feature in Development:</strong> Cohort analysis is coming soon. This will include retention rates by signup month, repeat purchase patterns, and customer lifecycle insights.
+        </div>
+        
+        <div class="row">
+            <div class="col-md-12">
+                <div class="chart-wrapper">
+                    <h5>Cohort Retention Heatmap</h5>
+                    {{ charts.cohort_heatmap|safe }}
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Forecast Tab -->
+    <div class="tab-pane fade" id="forecast" role="tabpanel" aria-labelledby="forecast-tab">
+        <h3 class="section-title">30-Day Forecast</h3>
+        
+        <div class="placeholder-notice">
+            <strong>Feature in Development:</strong> Forecasting is coming soon. This will include 30-day projections for sessions, revenue, and conversions using time series modeling.
+        </div>
+        
+        <div class="row">
+            <div class="col-md-12">
+                <div class="chart-wrapper">
+                    <h5>Performance Forecast</h5>
+                    {{ charts.forecast|safe }}
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Budget Tab -->
+    <div class="tab-pane fade" id="budget" role="tabpanel" aria-labelledby="budget-tab">
+        <h3 class="section-title">Budget Recommendations</h3>
+        
+        <div class="placeholder-notice">
+            <strong>Feature in Development:</strong> Budget optimization recommendations are coming soon. This will include suggestions based on marginal ROAS across channels and campaigns.
+        </div>
+        
+        <div class="row">
+            <div class="col-md-12">
+                <div class="chart-wrapper">
+                    <h5>Recommended Budget Allocation</h5>
+                    <p>{{ budget_recommendations }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Initialize tooltips
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl)
+    });
+    
+    // Placeholder for filter functionality
+    document.querySelector('.btn-primary').addEventListener('click', function() {
+        alert('Filter functionality will be implemented in the next phase.');
+    });
+    
+    // Add click-through functionality from charts to detailed views (placeholder)
+    document.querySelectorAll('.chart-wrapper').forEach(function(chart) {
+        chart.style.cursor = 'pointer';
+        chart.addEventListener('click', function() {
+            // This will be replaced with actual drill-down functionality
+            console.log('Chart clicked - drill down would happen here');
+        });
+    });
+</script>
+{% endblock %} 

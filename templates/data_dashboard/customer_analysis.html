@@ -1,0 +1,78 @@
+{% extends 'data_dashboard/base.html' %}
+
+{% block title %}Customer Analysis Dashboard{% endblock %}
+
+{% block content %}
+<div class="dashboard-header">
+    <h1>Customer Analysis Dashboard</h1>
+    <p class="lead">Understand customer demographics, segments, and purchasing behavior.</p>
+</div>
+
+<!-- Stats Cards -->
+<div class="row">
+    <div class="col-md-3">
+        <div class="card stats-card bg-light">
+            <div class="card-body text-center">
+                <h5 class="card-title">Total Customers</h5>
+                <h2 class="card-text">{{ demographics.total_customers }}</h2>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-3">
+        <div class="card stats-card bg-light">
+            <div class="card-body text-center">
+                <h5 class="card-title">Average Age</h5>
+                <h2 class="card-text">{{ demographics.avg_age|floatformat:1 }}</h2>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-3">
+        <div class="card stats-card bg-light">
+            <div class="card-body text-center">
+                <h5 class="card-title">Average Spend</h5>
+                <h2 class="card-text">${{ demographics.avg_total_spend|floatformat:2 }}</h2>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-3">
+        <div class="card stats-card bg-light">
+            <div class="card-body text-center">
+                <h5 class="card-title">Gender Ratio</h5>
+                <h2 class="card-text">
+                    M: {{ demographics.gender_distribution.M|floatformat:1 }}
+                    F: {{ demographics.gender_distribution.F|floatformat:1 }}
+                </h2>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Charts -->
+<div class="row mt-4">
+    <div class="col-md-6">
+        <div class="chart-container">
+            <h4>Customer Segments</h4>
+            {{ customer_segments_chart|safe }}
+        </div>
+    </div>
+    
+    <div class="col-md-6">
+        <div class="chart-container">
+            <h4>Age Distribution</h4>
+            {{ age_distribution_chart|safe }}
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-12">
+        <div class="chart-container">
+            <h4>Loyalty Tier Analysis</h4>
+            {{ loyalty_tier_chart|safe }}
+        </div>
+    </div>
+</div>
+{% endblock %}

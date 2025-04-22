@@ -1,0 +1,47 @@
+{% extends 'data_dashboard/base.html' %}
+
+{% block title %}Error - Digital Data Analysis{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card border-danger">
+                <div class="card-header bg-danger text-white">
+                    <h4 class="mb-0">Error Loading Data</h4>
+                </div>
+                <div class="card-body">
+                    <div class="alert alert-danger">
+                        {{ error_message }}
+                    </div>
+                    <p>Possible causes:</p>
+                    <ul>
+                        <li>One or more required CSV files are missing from the data directory</li>
+                        <li>CSV files have incorrect format or column names</li>
+                        <li>Permission issues accessing the data files</li>
+                    </ul>
+                    <h5>Troubleshooting Steps:</h5>
+                    <ol>
+                        <li>Verify that all required CSV files exist in the <code>data/</code> directory:</li>
+                        <ul>
+                            <li><code>google_analytics_data.csv</code></li>
+                            <li><code>customer_data.csv</code></li>
+                            <li><code>facebook_ads_data.csv</code></li>
+                            <li><code>instagram_ads_data.csv</code></li>
+                            <li><code>google_ads_data.csv</code></li>
+                            <li><code>customer_touchpoints.csv</code></li>
+                            <li><code>google_search_console_data.csv</code></li>
+                        </ul>
+                        <li>Check that each CSV file has the correct headers and data formats</li>
+                        <li>Ensure the application has read permissions for these files</li>
+                    </ol>
+                    <div class="mt-4">
+                        <a href="{% url 'data_dashboard:index' %}" class="btn btn-primary">Try Again</a>
+                        <a href="#" onclick="window.history.back()" class="btn btn-secondary">Go Back</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

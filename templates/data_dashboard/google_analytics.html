@@ -1,0 +1,86 @@
+{% extends 'data_dashboard/base.html' %}
+
+{% block title %}Google Analytics Dashboard{% endblock %}
+
+{% block content %}
+<div class="dashboard-header">
+    <h1>Google Analytics Dashboard</h1>
+    <p class="lead">Analyze website traffic, user behavior, and conversion metrics.</p>
+</div>
+
+<!-- Stats Cards -->
+<div class="row">
+    <div class="col-md-4">
+        <div class="card stats-card bg-light">
+            <div class="card-body text-center">
+                <h5 class="card-title">Total Sessions</h5>
+                <h2 class="card-text">{{ stats.total_sessions|floatformat:0 }}</h2>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4">
+        <div class="card stats-card bg-light">
+            <div class="card-body text-center">
+                <h5 class="card-title">Total Transactions</h5>
+                <h2 class="card-text">{{ stats.total_transactions|floatformat:0 }}</h2>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4">
+        <div class="card stats-card bg-light">
+            <div class="card-body text-center">
+                <h5 class="card-title">Total Revenue</h5>
+                <h2 class="card-text">${{ stats.total_revenue|floatformat:2 }}</h2>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-3">
+    <div class="col-md-6">
+        <div class="card stats-card bg-light">
+            <div class="card-body text-center">
+                <h5 class="card-title">New Users</h5>
+                <h2 class="card-text">{{ stats.total_new_users|floatformat:0 }}</h2>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-6">
+        <div class="card stats-card bg-light">
+            <div class="card-body text-center">
+                <h5 class="card-title">Average Conversion Rate</h5>
+                <h2 class="card-text">{{ stats.avg_conversion_rate|floatformat:2 }}%</h2>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Charts -->
+<div class="row mt-4">
+    <div class="col-md-6">
+        <div class="chart-container">
+            <h4>Sessions by Source</h4>
+            {{ sessions_by_source_chart|safe }}
+        </div>
+    </div>
+    
+    <div class="col-md-6">
+        <div class="chart-container">
+            <h4>Sessions by Device</h4>
+            {{ sessions_by_device_chart|safe }}
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-12">
+        <div class="chart-container">
+            <h4>Sessions and Transactions Over Time</h4>
+            {{ sessions_transactions_time_chart|safe }}
+        </div>
+    </div>
+</div>
+{% endblock %}

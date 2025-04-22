@@ -1,0 +1,41 @@
+date,source,medium,channel_grouping,device_category,landing_page,sessions,new_users,bounce_rate,pages_per_session,avg_session_duration,transactions,revenue,conversion_rate
+2024-01-01,google,organic,Organic Search,mobile,/collections/womens/summer-dresses,345,187,0.32,3.5,245,12,840.00,0.0348
+2024-01-01,google,cpc,Paid Search,mobile,/collections/womens/summer-dresses,187,98,0.28,4.2,312,8,560.00,0.0428
+2024-01-01,facebook,referral,Social,mobile,/collections/womens/summer-dresses,156,87,0.35,2.8,198,5,350.00,0.0321
+2024-01-01,instagram,referral,Social,mobile,/collections/womens/summer-dresses,123,76,0.38,2.5,176,3,210.00,0.0244
+2024-01-01,direct,none,Direct,desktop,/,234,112,0.25,5.6,423,15,1050.00,0.0641
+2024-01-01,google,organic,Organic Search,mobile,/collections/mens/summer-shirts,267,143,0.34,3.2,232,9,630.00,0.0337
+2024-01-01,google,cpc,Paid Search,mobile,/collections/mens/summer-shirts,132,76,0.30,3.8,287,5,350.00,0.0379
+2024-01-01,facebook,referral,Social,mobile,/collections/mens/summer-shirts,98,54,0.37,2.6,187,2,140.00,0.0204
+2024-01-02,google,organic,Organic Search,mobile,/collections/womens/summer-dresses,378,201,0.30,3.7,256,15,1050.00,0.0397
+2024-01-02,google,cpc,Paid Search,mobile,/collections/womens/summer-dresses,201,112,0.26,4.5,324,10,700.00,0.0498
+2024-01-02,facebook,referral,Social,mobile,/collections/womens/summer-dresses,176,98,0.33,3.0,210,7,490.00,0.0398
+2024-01-02,instagram,referral,Social,mobile,/collections/womens/summer-dresses,145,87,0.36,2.7,189,5,350.00,0.0345
+2024-01-02,direct,none,Direct,desktop,/,256,132,0.23,5.8,445,18,1260.00,0.0703
+2024-01-02,google,organic,Organic Search,mobile,/collections/mens/summer-shirts,289,156,0.32,3.4,245,11,770.00,0.0381
+2024-01-02,google,cpc,Paid Search,mobile,/collections/mens/summer-shirts,156,89,0.28,4.0,298,7,490.00,0.0449
+2024-01-02,facebook,referral,Social,mobile,/collections/mens/summer-shirts,112,67,0.35,2.8,198,4,280.00,0.0357
+2024-01-03,google,organic,Organic Search,mobile,/collections/womens/summer-dresses,412,223,0.28,3.9,267,18,1260.00,0.0437
+2024-01-03,google,cpc,Paid Search,mobile,/collections/womens/summer-dresses,223,132,0.24,4.7,336,13,910.00,0.0583
+2024-01-03,facebook,referral,Social,mobile,/collections/womens/summer-dresses,198,112,0.31,3.2,223,9,630.00,0.0455
+2024-01-03,instagram,referral,Social,mobile,/collections/womens/summer-dresses,167,98,0.34,2.9,201,7,490.00,0.0419
+2024-01-03,direct,none,Direct,desktop,/,278,154,0.21,6.0,467,21,1470.00,0.0755
+2024-01-03,google,organic,Organic Search,mobile,/collections/mens/summer-shirts,312,167,0.30,3.6,256,14,980.00,0.0449
+2024-01-03,google,cpc,Paid Search,mobile,/collections/mens/summer-shirts,178,101,0.26,4.2,310,9,630.00,0.0506
+2024-01-03,facebook,referral,Social,mobile,/collections/mens/summer-shirts,132,78,0.33,3.0,210,6,420.00,0.0455
+2024-01-04,google,organic,Organic Search,mobile,/collections/womens/summer-dresses,445,245,0.26,4.1,278,22,1540.00,0.0494
+2024-01-04,google,cpc,Paid Search,mobile,/collections/womens/summer-dresses,245,143,0.22,4.9,348,16,1120.00,0.0653
+2024-01-04,facebook,referral,Social,mobile,/collections/womens/summer-dresses,223,132,0.29,3.4,234,11,770.00,0.0493
+2024-01-04,instagram,referral,Social,mobile,/collections/womens/summer-dresses,189,112,0.32,3.1,212,9,630.00,0.0476
+2024-01-04,direct,none,Direct,desktop,/,301,176,0.19,6.2,489,25,1750.00,0.0831
+2024-01-04,google,organic,Organic Search,mobile,/collections/mens/summer-shirts,334,178,0.28,3.8,267,17,1190.00,0.0509
+2024-01-04,google,cpc,Paid Search,mobile,/collections/mens/summer-shirts,201,112,0.24,4.4,321,11,770.00,0.0547
+2024-01-04,facebook,referral,Social,mobile,/collections/mens/summer-shirts,154,89,0.31,3.2,221,8,560.00,0.0519
+2024-01-05,google,organic,Organic Search,mobile,/collections/womens/summer-dresses,478,267,0.24,4.3,289,26,1820.00,0.0544
+2024-01-05,google,cpc,Paid Search,mobile,/collections/womens/summer-dresses,267,154,0.20,5.1,359,19,1330.00,0.0712
+2024-01-05,facebook,referral,Social,mobile,/collections/womens/summer-dresses,245,143,0.27,3.6,245,14,980.00,0.0571
+2024-01-05,instagram,referral,Social,mobile,/collections/womens/summer-dresses,212,132,0.30,3.3,223,11,770.00,0.0519
+2024-01-05,direct,none,Direct,desktop,/,323,198,0.17,6.4,512,29,2030.00,0.0898
+2024-01-05,google,organic,Organic Search,mobile,/collections/mens/summer-shirts,356,189,0.26,4.0,278,20,1400.00,0.0562
+2024-01-05,google,cpc,Paid Search,mobile,/collections/mens/summer-shirts,223,132,0.22,4.6,332,14,980.00,0.0628
+2024-01-05,facebook,referral,Social,mobile,/collections/mens/summer-shirts,176,101,0.29,3.4,232,10,700.00,0.0568

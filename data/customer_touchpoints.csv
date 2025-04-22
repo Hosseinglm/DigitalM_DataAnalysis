@@ -1,0 +1,63 @@
+touchpoint_id,customer_id,date,channel,source,campaign_id,campaign_name,interaction_type,conversion,conversion_value,product_category,product_id,product_name
+10001,1001,2024-01-01,Paid Search,Google Ads,1001,Summer_Collection_2024,ad_click,FALSE,0.00,Men's Shirts,NULL,NULL
+10002,1001,2024-01-01,Organic Search,Google,NULL,NULL,site_visit,FALSE,0.00,Men's Shirts,NULL,NULL
+10003,1001,2024-01-02,Email,Newsletter,NULL,Weekly_Deals,email_open,FALSE,0.00,NULL,NULL,NULL
+10004,1001,2024-01-02,Paid Social,Facebook,2001,Summer_Collection_FB,ad_click,TRUE,80.00,Men's Shirts,2001,Summer Linen Shirt
+10005,1002,2024-01-01,Paid Social,Instagram,3001,Summer_Collection_IG,ad_impression,FALSE,0.00,Women's Dresses,NULL,NULL
+10006,1002,2024-01-01,Paid Social,Instagram,3001,Summer_Collection_IG,ad_click,FALSE,0.00,Women's Dresses,NULL,NULL
+10007,1002,2024-01-02,Organic Search,Google,NULL,NULL,site_visit,FALSE,0.00,Women's Dresses,NULL,NULL
+10008,1002,2024-01-03,Paid Search,Google Ads,1001,Summer_Collection_2024,ad_click,TRUE,70.00,Women's Dresses,1001,Floral Summer Dress
+10009,1003,2024-01-01,Paid Search,Google Ads,1002,Winter_Sale_2024,ad_click,FALSE,0.00,Men's Outerwear,NULL,NULL
+10010,1003,2024-01-01,Organic Social,Facebook,NULL,NULL,page_visit,FALSE,0.00,NULL,NULL,NULL
+10011,1003,2024-01-01,Paid Social,Facebook,2002,Winter_Sale_FB,ad_click,TRUE,80.00,Men's Outerwear,3001,Winter Coat Classic
+10012,1004,2024-01-02,Organic Search,Google,NULL,NULL,site_visit,FALSE,0.00,Women's Accessories,NULL,NULL
+10013,1004,2024-01-03,Email,Newsletter,NULL,New_Arrivals,email_click,FALSE,0.00,Women's Accessories,NULL,NULL
+10014,1004,2024-01-04,Paid Social,Instagram,3004,Spring_Preview_IG,ad_click,TRUE,45.00,Women's Accessories,4001,Spring Scarf Set
+10015,1005,2024-01-01,Direct,NULL,NULL,NULL,site_visit,FALSE,0.00,NULL,NULL,NULL
+10016,1005,2024-01-01,Organic Search,Google,NULL,NULL,site_visit,FALSE,0.00,Men's Shirts,NULL,NULL
+10017,1005,2024-01-01,Paid Search,Google Ads,1003,Everyday_Essentials,ad_click,FALSE,0.00,Men's Shirts,NULL,NULL
+10018,1006,2024-01-01,Paid Social,Facebook,2001,Summer_Collection_FB,ad_impression,FALSE,0.00,Women's Dresses,NULL,NULL
+10019,1006,2024-01-01,Paid Social,Facebook,2001,Summer_Collection_FB,ad_click,FALSE,0.00,Women's Dresses,NULL,NULL
+10020,1006,2024-01-02,Email,Newsletter,NULL,Featured_Products,email_click,TRUE,95.00,Women's Dresses,1002,Summer Maxi Dress
+10021,1007,2024-01-01,Organic Search,Google,NULL,NULL,site_visit,FALSE,0.00,Men's Accessories,NULL,NULL
+10022,1007,2024-01-01,Referral,Fashion Blog,NULL,NULL,site_visit,FALSE,0.00,Men's Accessories,NULL,NULL
+10023,1007,2024-01-02,Paid Search,Google Ads,1003,Everyday_Essentials,ad_click,FALSE,0.00,Men's Accessories,NULL,NULL
+10024,1008,2024-01-03,Paid Social,Instagram,3004,Spring_Preview_IG,ad_impression,FALSE,0.00,Women's Outerwear,NULL,NULL
+10025,1008,2024-01-04,Organic Search,Google,NULL,NULL,site_visit,FALSE,0.00,Women's Outerwear,NULL,NULL
+10026,1008,2024-01-05,Paid Search,Google Ads,1004,Spring_Preview,ad_click,TRUE,65.00,Women's Outerwear,5001,Spring Jacket
+10027,1009,2024-01-01,Paid Social,Facebook,2001,Summer_Collection_FB,ad_click,FALSE,0.00,Men's Shirts,NULL,NULL
+10028,1009,2024-01-01,Organic Search,Google,NULL,NULL,site_visit,FALSE,0.00,Men's Shirts,NULL,NULL
+10029,1009,2024-01-02,Email,Newsletter,NULL,Weekly_Deals,email_open,FALSE,0.00,NULL,NULL,NULL
+10030,1010,2024-01-01,Paid Search,Google Ads,1001,Summer_Collection_2024,ad_impression,FALSE,0.00,Women's Dresses,NULL,NULL
+10031,1010,2024-01-02,Paid Social,Instagram,3001,Summer_Collection_IG,ad_click,FALSE,0.00,Women's Dresses,NULL,NULL
+10032,1010,2024-01-03,Paid Search,Google Ads,1001,Summer_Collection_2024,ad_click,TRUE,110.00,Women's Dresses,1003,Evening Cocktail Dress
+10033,1011,2024-01-01,Organic Search,Google,NULL,NULL,site_visit,FALSE,0.00,Men's Outerwear,NULL,NULL
+10034,1011,2024-01-02,Paid Social,Facebook,2002,Winter_Sale_FB,ad_impression,FALSE,0.00,Men's Outerwear,NULL,NULL
+10035,1011,2024-01-02,Paid Social,Facebook,2002,Winter_Sale_FB,ad_click,FALSE,0.00,Men's Outerwear,NULL,NULL
+10036,1012,2024-01-03,Paid Social,Instagram,3004,Spring_Preview_IG,ad_click,FALSE,0.00,Women's Accessories,NULL,NULL
+10037,1012,2024-01-03,Organic Search,Google,NULL,NULL,site_visit,FALSE,0.00,Women's Accessories,NULL,NULL
+10038,1012,2024-01-04,Paid Search,Google Ads,1004,Spring_Preview,ad_click,TRUE,40.00,Women's Accessories,4002,Summer Hat Collection
+10039,1013,2024-01-01,Email,Newsletter,NULL,New_Arrivals,email_open,FALSE,0.00,NULL,NULL,NULL
+10040,1013,2024-01-01,Email,Newsletter,NULL,New_Arrivals,email_click,FALSE,0.00,Men's Shirts,NULL,NULL
+10041,1013,2024-01-02,Paid Search,Google Ads,1003,Everyday_Essentials,ad_click,FALSE,0.00,Men's Shirts,NULL,NULL
+10042,1014,2024-01-01,Paid Social,Facebook,2001,Summer_Collection_FB,ad_impression,FALSE,0.00,Women's Dresses,NULL,NULL
+10043,1014,2024-01-01,Paid Social,Facebook,2001,Summer_Collection_FB,ad_click,FALSE,0.00,Women's Dresses,NULL,NULL
+10044,1014,2024-01-02,Organic Search,Google,NULL,NULL,site_visit,TRUE,85.00,Women's Dresses,1004,Spring Collection Dress
+10045,1015,2024-01-01,Paid Search,Google Ads,1003,Everyday_Essentials,ad_impression,FALSE,0.00,Men's Accessories,NULL,NULL
+10046,1015,2024-01-01,Organic Social,Facebook,NULL,NULL,page_visit,FALSE,0.00,NULL,NULL,NULL
+10047,1015,2024-01-02,Paid Social,Facebook,2003,Everyday_Basics_FB,ad_click,FALSE,0.00,Men's Accessories,NULL,NULL
+10048,1016,2024-01-03,Paid Search,Google Ads,1002,Winter_Sale_2024,ad_click,FALSE,0.00,Women's Outerwear,NULL,NULL
+10049,1016,2024-01-04,Email,Newsletter,NULL,Winter_Sale,email_click,FALSE,0.00,Women's Outerwear,NULL,NULL
+10050,1016,2024-01-05,Paid Social,Facebook,2002,Winter_Sale_FB,ad_click,TRUE,120.00,Women's Outerwear,3002,Winter Coat Deluxe
+10051,1017,2024-01-01,Organic Search,Google,NULL,NULL,site_visit,FALSE,0.00,Men's Shirts,NULL,NULL
+10052,1017,2024-01-01,Paid Social,Instagram,3001,Summer_Collection_IG,ad_impression,FALSE,0.00,Men's Shirts,NULL,NULL
+10053,1017,2024-01-02,Paid Search,Google Ads,1001,Summer_Collection_2024,ad_click,FALSE,0.00,Men's Shirts,NULL,NULL
+10054,1018,2024-01-02,Paid Social,Instagram,3005,Valentine_Special_IG,ad_impression,FALSE,0.00,Women's Accessories,NULL,NULL
+10055,1018,2024-01-02,Paid Social,Instagram,3005,Valentine_Special_IG,ad_click,FALSE,0.00,Women's Accessories,NULL,NULL
+10056,1018,2024-01-03,Organic Search,Google,NULL,NULL,site_visit,TRUE,55.00,Women's Accessories,4003,Jewelry Set
+10057,1019,2024-01-01,Paid Search,Google Ads,1002,Winter_Sale_2024,ad_impression,FALSE,0.00,Men's Outerwear,NULL,NULL
+10058,1019,2024-01-01,Organic Search,Google,NULL,NULL,site_visit,FALSE,0.00,Men's Outerwear,NULL,NULL
+10059,1019,2024-01-02,Email,Newsletter,NULL,Winter_Sale,email_click,FALSE,0.00,Men's Outerwear,NULL,NULL
+10060,1020,2024-01-01,Paid Social,Facebook,2001,Summer_Collection_FB,ad_click,FALSE,0.00,Women's Dresses,NULL,NULL
+10061,1020,2024-01-01,Organic Search,Google,NULL,NULL,site_visit,FALSE,0.00,Women's Dresses,NULL,NULL
+10062,1020,2024-01-01,Paid Search,Google Ads,1001,Summer_Collection_2024,ad_click,TRUE,90.00,Women's Dresses,1005,Business Casual Dress

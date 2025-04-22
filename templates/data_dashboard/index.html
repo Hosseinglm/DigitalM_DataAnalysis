@@ -1,0 +1,167 @@
+{% extends 'data_dashboard/base.html' %}
+
+{% block title %}Digital Data Analysis Dashboard{% endblock %}
+
+{% block content %}
+<div class="dashboard-header">
+    <h1>Digital Data Analysis Dashboard</h1>
+    <p class="lead">Welcome to the Digital Data Analysis Dashboard. This dashboard provides insights into your digital marketing performance, customer behavior, and website analytics.</p>
+</div>
+
+{% if top_kpis %}
+<!-- Display KPIs if they exist in the context -->
+<div class="row mb-4">
+    <div class="col-md-3">
+        <div class="card stats-card">
+            <div class="card-body text-center">
+                <h5 class="card-title">Total Revenue</h5>
+                <h2 class="mb-0">{{ top_kpis.Total_Revenue }}</h2>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-3">
+        <div class="card stats-card">
+            <div class="card-body text-center">
+                <h5 class="card-title">Blended ROAS</h5>
+                <h2 class="mb-0">{{ top_kpis.Blended_ROAS }}</h2>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-3">
+        <div class="card stats-card">
+            <div class="card-body text-center">
+                <h5 class="card-title">Total Sessions</h5>
+                <h2 class="mb-0">{{ top_kpis.Total_Sessions }}</h2>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-3">
+        <div class="card stats-card">
+            <div class="card-body text-center">
+                <h5 class="card-title">Total Customers</h5>
+                <h2 class="mb-0">{{ top_kpis.Total_Customers }}</h2>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Display charts if they exist in the context -->
+{% if sessions_transactions_chart %}
+<div class="row mb-4">
+    <div class="col-12">
+        <div class="card chart-container">
+            <div class="card-body">
+                <h5 class="card-title">Sessions & Transactions Over Time</h5>
+                {{ sessions_transactions_chart|safe }}
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+{% if ad_performance_chart %}
+<div class="row mb-4">
+    <div class="col-12">
+        <div class="card chart-container">
+            <div class="card-body">
+                <h5 class="card-title">Ad Performance Trends</h5>
+                {{ ad_performance_chart|safe }}
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endif %}
+
+<!-- Navigation Cards -->
+<div class="row">
+    <div class="col-md-4">
+        <div class="card stats-card">
+            <div class="card-body">
+                <h5 class="card-title">Google Analytics</h5>
+                <p class="card-text">Analyze website traffic, user behavior, and conversion metrics.</p>
+                <a href="{% url 'data_dashboard:google_analytics' %}" class="btn btn-primary">View Analytics</a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4">
+        <div class="card stats-card">
+            <div class="card-body">
+                <h5 class="card-title">Customer Analysis</h5>
+                <p class="card-text">Understand customer demographics, segments, and purchasing behavior.</p>
+                <a href="{% url 'data_dashboard:customer_analysis' %}" class="btn btn-primary">View Customer Data</a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4">
+        <div class="card stats-card">
+            <div class="card-body">
+                <h5 class="card-title">Ad Performance</h5>
+                <p class="card-text">Compare performance across advertising platforms and campaigns.</p>
+                <a href="{% url 'data_dashboard:ad_performance' %}" class="btn btn-primary">View Ad Performance</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-6">
+        <div class="card stats-card">
+            <div class="card-body">
+                <h5 class="card-title">
+                    Integrated Dashboard 
+                    <span class="badge bg-success">New</span>
+                </h5>
+                <p class="card-text">Access our new comprehensive dashboard with all metrics in one place.</p>
+                <a href="{% url 'data_dashboard:dashboard' %}" class="btn btn-success">View Full Dashboard</a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-6">
+        <div class="card stats-card">
+            <div class="card-body">
+                <h5 class="card-title">
+                    Advanced Features 
+                    <span class="badge bg-warning">Beta</span>
+                </h5>
+                <p class="card-text">Explore new attribution models, cohort analysis, forecasting, and budget recommendations.</p>
+                <div class="btn-group">
+                    <a href="{% url 'data_dashboard:attribution' %}" class="btn btn-outline-primary">Attribution</a>
+                    <a href="{% url 'data_dashboard:cohort_analysis' %}" class="btn btn-outline-primary">Cohorts</a>
+                    <a href="{% url 'data_dashboard:forecast' %}" class="btn btn-outline-primary">Forecast</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">About This Dashboard</h5>
+                <p class="card-text">
+                    This dashboard provides a comprehensive view of your digital marketing and customer data. It includes:
+                </p>
+                <ul>
+                    <li><strong>Google Analytics Data:</strong> Sessions, conversions, revenue, and user behavior metrics</li>
+                    <li><strong>Customer Data:</strong> Demographics, segments, loyalty tiers, and purchasing patterns</li>
+                    <li><strong>Ad Performance:</strong> Metrics from Facebook, Instagram, and Google Ads platforms</li>
+                    <li><strong>CPA, CVR, AOV, LTV, & ROAS:</strong> Unified marketing metrics across all channels</li>
+                    <li><strong>Attribution Models:</strong> Multiple attribution methodologies to analyze marketing effectiveness</li>
+                    <li><strong>Forecasting:</strong> 30-day projections for key business metrics</li>
+                </ul>
+                <p class="card-text">
+                    All visualizations are interactive. You can hover over data points for more information, zoom in/out, and download charts as images.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,29 @@
+date,query,page,device,country,impressions,clicks,ctr,position
+2024-01-01,summer dresses,/collections/womens/summer-dresses,mobile,US,2345,187,0.0797,3.2
+2024-01-01,summer shirts men,/collections/mens/summer-shirts,mobile,US,1876,132,0.0704,4.1
+2024-01-01,winter coats sale,/collections/winter-sale/coats,desktop,US,1543,98,0.0635,2.8
+2024-01-01,basic t-shirts,/collections/basics/tees,tablet,US,1234,76,0.0616,5.2
+2024-01-02,summer dresses,/collections/womens/summer-dresses,mobile,US,2456,201,0.0818,3.1
+2024-01-02,summer shirts men,/collections/mens/summer-shirts,mobile,US,1923,145,0.0754,3.9
+2024-01-02,winter coats sale,/collections/winter-sale/coats,desktop,US,1621,112,0.0691,2.7
+2024-01-02,basic t-shirts,/collections/basics/tees,tablet,US,1345,89,0.0662,4.8
+2024-01-03,summer dresses,/collections/womens/summer-dresses,mobile,US,2567,223,0.0869,2.9
+2024-01-03,summer shirts men,/collections/mens/summer-shirts,mobile,US,2012,156,0.0775,3.7
+2024-01-03,winter coats sale,/collections/winter-sale/coats,desktop,US,1532,101,0.0659,2.9
+2024-01-03,basic t-shirts,/collections/basics/tees,tablet,US,1456,98,0.0673,4.5
+2024-01-04,summer dresses,/collections/womens/summer-dresses,mobile,US,2678,245,0.0915,2.7
+2024-01-04,summer shirts men,/collections/mens/summer-shirts,mobile,US,1987,143,0.0720,3.8
+2024-01-04,winter coats sale,/collections/winter-sale/coats,desktop,US,1423,87,0.0611,3.1
+2024-01-04,basic t-shirts,/collections/basics/tees,tablet,US,1567,112,0.0715,4.3
+2024-01-05,summer dresses,/collections/womens/summer-dresses,mobile,US,2789,267,0.0957,2.5
+2024-01-05,summer shirts men,/collections/mens/summer-shirts,mobile,US,2134,167,0.0783,3.5
+2024-01-05,winter coats sale,/collections/winter-sale/coats,desktop,US,1321,76,0.0575,3.4
+2024-01-05,basic t-shirts,/collections/basics/tees,tablet,US,1678,132,0.0787,4.0
+2024-01-06,spring dresses,/collections/womens/spring-dresses,mobile,US,1987,156,0.0785,3.6
+2024-01-06,spring accessories,/collections/accessories/spring,desktop,US,1654,112,0.0677,4.2
+2024-01-06,valentine gift ideas,/collections/valentines/gifts,tablet,US,2345,198,0.0844,2.8
+2024-01-06,valentine jewelry,/collections/valentines/jewelry,mobile,US,1876,143,0.0762,3.3
+2024-01-07,spring dresses,/collections/womens/spring-dresses,mobile,US,2134,176,0.0825,3.4
+2024-01-07,spring accessories,/collections/accessories/spring,desktop,US,1765,132,0.0748,3.9
+2024-01-07,valentine gift ideas,/collections/valentines/gifts,tablet,US,2567,223,0.0869,2.6
+2024-01-07,valentine jewelry,/collections/valentines/jewelry,mobile,US,2012,167,0.0830,3.1

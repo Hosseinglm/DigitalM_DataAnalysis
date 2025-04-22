@@ -1,0 +1,81 @@
+{% extends 'data_dashboard/base.html' %}
+
+{% block title %}Ad Performance Dashboard{% endblock %}
+
+{% block content %}
+<div class="dashboard-header">
+    <h1>Ad Performance Dashboard</h1>
+    <p class="lead">Compare performance across advertising platforms and campaigns.</p>
+</div>
+
+<!-- Platform Performance Table -->
+<div class="row">
+    <div class="col-12">
+        <div class="card mb-4">
+            <div class="card-header">
+                <h4>Platform Performance Comparison</h4>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th>Platform</th>
+                                <th>Impressions</th>
+                                <th>Clicks</th>
+                                <th>Conversions</th>
+                                <th>Spend</th>
+                                <th>Conversion Value</th>
+                                <th>CTR</th>
+                                <th>CPC</th>
+                                <th>ROAS</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for platform in platform_performance %}
+                            <tr>
+                                <td>{{ platform.platform }}</td>
+                                <td>{{ platform.impressions|floatformat:0 }}</td>
+                                <td>{{ platform.clicks|floatformat:0 }}</td>
+                                <td>{{ platform.conversions|floatformat:0 }}</td>
+                                <td>${{ platform.spend|floatformat:2 }}</td>
+                                <td>${{ platform.conversion_value|floatformat:2 }}</td>
+                                <td>{{ platform.ctr|floatformat:4 }}</td>
+                                <td>${{ platform.cpc|floatformat:2 }}</td>
+                                <td>{{ platform.roas|floatformat:2 }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Charts -->
+<div class="row">
+    <div class="col-md-6">
+        <div class="chart-container">
+            <h4>Conversions by Platform</h4>
+            {{ platform_conversions_chart|safe }}
+        </div>
+    </div>
+    
+    <div class="col-md-6">
+        <div class="chart-container">
+            <h4>Return on Ad Spend (ROAS) by Platform</h4>
+            {{ platform_roas_chart|safe }}
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-12">
+        <div class="chart-container">
+            <h4>Daily Conversions by Platform</h4>
+            {{ daily_conversions_chart|safe }}
+        </div>
+    </div>
+</div>
+{% endblock %}

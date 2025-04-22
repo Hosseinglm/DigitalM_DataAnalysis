@@ -1,0 +1,21 @@
+customer_id,first_name,last_name,email,gender,age,city,state,signup_date,customer_segment,total_orders,total_spend,avg_order_value,last_purchase_date,days_since_last_purchase,favorite_category,favorite_product,email_subscriber,mobile_app_user,loyalty_tier
+1001,John,Smith,john.smith@email.com,M,34,New York,NY,2023-01-15,High Value,12,1250.45,104.20,2024-01-02,5,Men's Shirts,Summer Linen Shirt,TRUE,TRUE,Gold
+1002,Emily,Johnson,emily.j@email.com,F,29,Los Angeles,CA,2023-02-03,Regular,8,645.75,80.72,2024-01-03,4,Women's Dresses,Floral Summer Dress,TRUE,TRUE,Silver
+1003,Michael,Williams,m.williams@email.com,M,42,Chicago,IL,2023-01-22,High Value,15,1876.30,125.09,2024-01-01,6,Men's Outerwear,Winter Coat Classic,TRUE,FALSE,Gold
+1004,Jessica,Brown,jess.brown@email.com,F,31,Houston,TX,2023-03-11,Regular,6,487.20,81.20,2024-01-04,3,Women's Accessories,Spring Scarf Set,FALSE,TRUE,Bronze
+1005,David,Jones,david.j@email.com,M,27,Philadelphia,PA,2023-02-18,At Risk,3,210.45,70.15,2023-11-15,53,Men's Shirts,Basic Tee 3-Pack,TRUE,FALSE,Bronze
+1006,Sarah,Garcia,s.garcia@email.com,F,38,Phoenix,AZ,2023-01-05,High Value,18,2145.60,119.20,2024-01-02,5,Women's Dresses,Summer Maxi Dress,TRUE,TRUE,Platinum
+1007,Robert,Miller,rob.miller@email.com,M,45,San Antonio,TX,2023-04-02,Regular,7,598.40,85.49,2023-12-12,26,Men's Accessories,Leather Belt,FALSE,FALSE,Silver
+1008,Jennifer,Davis,jen.davis@email.com,F,33,San Diego,CA,2023-02-27,Regular,9,723.15,80.35,2024-01-05,2,Women's Outerwear,Spring Jacket,TRUE,TRUE,Silver
+1009,James,Rodriguez,j.rodriguez@email.com,M,29,Dallas,TX,2023-03-15,At Risk,4,267.80,66.95,2023-11-02,66,Men's Shirts,Graphic Tee Collection,FALSE,TRUE,Bronze
+1010,Lisa,Martinez,lisa.m@email.com,F,36,San Jose,CA,2023-01-18,High Value,14,1654.25,118.16,2024-01-03,4,Women's Dresses,Evening Cocktail Dress,TRUE,TRUE,Gold
+1011,Thomas,Hernandez,t.hernandez@email.com,M,41,Austin,TX,2023-02-09,Regular,8,687.35,85.92,2023-12-28,10,Men's Outerwear,Lightweight Jacket,TRUE,FALSE,Silver
+1012,Michelle,Lopez,michelle.l@email.com,F,28,Jacksonville,FL,2023-04-05,New,2,178.90,89.45,2024-01-04,3,Women's Accessories,Summer Hat Collection,TRUE,TRUE,Bronze
+1013,Daniel,Gonzalez,d.gonzalez@email.com,M,32,San Francisco,CA,2023-01-29,Regular,7,612.40,87.49,2023-12-15,23,Men's Shirts,Office Button-Down,FALSE,TRUE,Silver
+1014,Amanda,Wilson,a.wilson@email.com,F,39,Indianapolis,IN,2023-02-14,High Value,16,1897.60,118.60,2024-01-02,5,Women's Dresses,Spring Collection Dress,TRUE,TRUE,Gold
+1015,Christopher,Anderson,c.anderson@email.com,M,44,Columbus,OH,2023-03-22,Regular,5,432.75,86.55,2023-12-20,18,Men's Accessories,Wallet and Belt Set,TRUE,FALSE,Bronze
+1016,Stephanie,Thomas,s.thomas@email.com,F,30,Charlotte,NC,2023-01-12,High Value,13,1543.20,118.71,2024-01-05,2,Women's Outerwear,Winter Coat Deluxe,TRUE,TRUE,Gold
+1017,Matthew,Taylor,m.taylor@email.com,M,37,Seattle,WA,2023-02-21,Regular,9,765.30,85.03,2023-12-30,8,Men's Shirts,Casual Polo Set,FALSE,TRUE,Silver
+1018,Nicole,Moore,nicole.m@email.com,F,26,Denver,CO,2023-04-08,New,1,95.40,95.40,2024-01-03,4,Women's Accessories,Jewelry Set,TRUE,FALSE,Bronze
+1019,Andrew,Jackson,a.jackson@email.com,M,31,Boston,MA,2023-01-25,Regular,6,534.60,89.10,2023-12-10,28,Men's Outerwear,Rain Jacket,TRUE,TRUE,Silver
+1020,Elizabeth,Martin,e.martin@email.com,F,35,Nashville,TN,2023-02-06,High Value,17,2034.15,119.66,2024-01-01,6,Women's Dresses,Business Casual Dress,TRUE,TRUE,Platinum

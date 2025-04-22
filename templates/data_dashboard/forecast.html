@@ -1,0 +1,489 @@
+{% extends 'data_dashboard/base.html' %}
+
+{% block title %}Sales Forecast - Digital Data Analysis{% endblock %}
+
+{% block extra_css %}
+<style>
+    .forecast-settings {
+        background-color: #f8f9fa;
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 20px;
+    }
+    .forecast-card {
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+        transition: all 0.3s ease;
+    }
+    .forecast-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    }
+    .metric-card {
+        text-align: center;
+        padding: 15px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        margin-bottom: 15px;
+        background-color: #fff;
+    }
+    .metric-value {
+        font-size: 24px;
+        font-weight: bold;
+        color: #0d6efd;
+    }
+    .metric-label {
+        color: #6c757d;
+        font-size: 14px;
+        margin-bottom: 5px;
+    }
+    .metric-context {
+        font-size: 12px;
+        color: #6c757d;
+    }
+    .growth-positive {
+        color: #198754;
+    }
+    .growth-negative {
+        color: #dc3545;
+    }
+    .insight-item {
+        background-color: #f8f9fa;
+        border-left: 4px solid #0d6efd;
+        padding: 10px 15px;
+        margin-bottom: 15px;
+        border-radius: 0 4px 4px 0;
+    }
+    .insight-item.warning {
+        border-left-color: #ffc107;
+    }
+    .insight-item.positive {
+        border-left-color: #198754;
+    }
+    .insight-item.negative {
+        border-left-color: #dc3545;
+    }
+    .selected-horizon {
+        background-color: rgba(13, 110, 253, 0.1);
+        border: 2px solid #0d6efd !important;
+        font-weight: bold;
+    }
+    .forecast-summary-table th {
+        background-color: #f8f9fa;
+    }
+    .forecast-periods {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 20px;
+    }
+    .forecast-period-option {
+        flex: 1;
+        text-align: center;
+        padding: 10px;
+        border: 1px solid #dee2e6;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+    }
+    .forecast-period-option:hover {
+        background-color: rgba(13, 110, 253, 0.05);
+    }
+    .forecast-period-option.active {
+        background-color: rgba(13, 110, 253, 0.1);
+        border-color: #0d6efd;
+        font-weight: bold;
+    }
+    .highlighted-message {
+        background-color: #e8f4fd;
+        border-radius: 8px;
+        padding: 15px;
+        margin-bottom: 20px;
+    }
+    .confidence-area {
+        opacity: 0.3;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="dashboard-header">
+    <h1>Sales Forecast</h1>
+    <p class="lead">Data-driven predictions to support your business planning</p>
+</div>
+
+<div class="highlighted-message">
+    <div class="d-flex align-items-center">
+        <i class="fas fa-chart-line text-primary me-3" style="font-size: 24px;"></i>
+        <div>
+            <h5 class="mb-1">30-Day Revenue Forecast</h5>
+            <p class="mb-0">Your near-term sales projection with confidence intervals based on historical patterns, seasonality, and current performance trends.</p>
+        </div>
+    </div>
+</div>
+
+<div class="card mb-4">
+    <div class="card-header">
+        <h4 class="mb-0">Forecast Settings</h4>
+    </div>
+    <div class="card-body forecast-settings">
+        <form id="forecastSettingsForm" method="POST" action="{% url 'data_dashboard:forecast' %}">
+            {% csrf_token %}
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="forecastMetric" class="form-label">Forecast Metric</label>
+                    <select class="form-select" id="forecastMetric" name="forecast_metric">
+                        <option value="revenue" {% if forecast_metric == 'revenue' %}selected{% endif %}>Revenue</option>
+                        <option value="transactions" {% if forecast_metric == 'transactions' %}selected{% endif %}>Transactions</option>
+                        <option value="new_customers" {% if forecast_metric == 'new_customers' %}selected{% endif %}>New Customers</option>
+                        <option value="aov" {% if forecast_metric == 'aov' %}selected{% endif %}>Average Order Value</option>
+                    </select>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="forecastHorizon" class="form-label">Forecast Horizon</label>
+                    <select class="form-select" id="forecastHorizon" name="forecast_horizon">
+                        <option value="30" {% if forecast_horizon == '30' %}selected{% endif %}>30 Days</option>
+                        <option value="90" {% if forecast_horizon == '90' %}selected{% endif %}>90 Days</option>
+                        <option value="180" {% if forecast_horizon == '180' %}selected{% endif %}>180 Days</option>
+                        <option value="365" {% if forecast_horizon == '365' %}selected{% endif %}>365 Days</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="modelType" class="form-label">Model Type</label>
+                    <select class="form-select" id="modelType" name="model_type">
+                        <option value="auto" {% if model_type == 'auto' %}selected{% endif %}>Auto (Best Fit)</option>
+                        <option value="arima" {% if model_type == 'arima' %}selected{% endif %}>ARIMA</option>
+                        <option value="prophet" {% if model_type == 'prophet' %}selected{% endif %}>Prophet</option>
+                        <option value="xgboost" {% if model_type == 'xgboost' %}selected{% endif %}>XGBoost</option>
+                        <option value="lstm" {% if model_type == 'lstm' %}selected{% endif %}>LSTM</option>
+                    </select>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="scenario" class="form-label">Scenario</label>
+                    <select class="form-select" id="scenario" name="scenario">
+                        <option value="base" {% if scenario == 'base' %}selected{% endif %}>Base Case</option>
+                        <option value="optimistic" {% if scenario == 'optimistic' %}selected{% endif %}>Optimistic</option>
+                        <option value="pessimistic" {% if scenario == 'pessimistic' %}selected{% endif %}>Pessimistic</option>
+                    </select>
+                </div>
+            </div>
+            <div class="mt-3">
+                <button type="submit" class="btn btn-primary">Update Forecast</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% if is_placeholder %}
+<div class="alert alert-info mb-4">
+    <h4 class="alert-heading">Welcome to the Forecast Dashboard</h4>
+    <p>This dashboard provides sales forecasts based on your historical data. Use the form above to customize your forecast view.</p>
+    <p>The template is currently displaying placeholder data. Once connected to your actual data, it will display real forecasts.</p>
+</div>
+{% endif %}
+
+<div class="forecast-periods">
+    <div class="forecast-period-option active" data-period="30">Next 30 Days</div>
+    <div class="forecast-period-option" data-period="90">Next 90 Days</div>
+    <div class="forecast-period-option" data-period="180">Next 180 Days</div>
+    <div class="forecast-period-option" data-period="365">Next 365 Days</div>
+</div>
+
+<div class="row mb-4">
+    <div class="col-md-8">
+        <div class="card forecast-card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h4 class="mb-0">Revenue Forecast</h4>
+                <div>
+                    <span class="badge bg-primary">30-Day View</span>
+                </div>
+            </div>
+            <div class="card-body">
+                {{ forecast_chart|safe }}
+                <div class="mt-3">
+                    <p class="text-muted"><i class="fas fa-info-circle me-1"></i> Shaded area represents 95% confidence interval.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="row">
+            <div class="col-md-12 mb-3">
+                <div class="metric-card">
+                    <div class="metric-label">30-Day Forecast Total</div>
+                    <div class="metric-value">
+                        {% if forecast_total %}
+                            ${{ forecast_total|floatformat:0 }}
+                        {% else %}
+                            $128,500
+                        {% endif %}
+                    </div>
+                    <div class="metric-context growth-positive">
+                        {% if forecast_growth %}
+                            +{{ forecast_growth|floatformat:1 }}% vs. previous period
+                        {% else %}
+                            +12.4% vs. previous period
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="metric-card">
+                    <div class="metric-label">Forecast Accuracy</div>
+                    <div class="metric-value">
+                        {% if forecast_accuracy %}
+                            {{ forecast_accuracy|floatformat:1 }}%
+                        {% else %}
+                            92.5%
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="metric-card">
+                    <div class="metric-label">Confidence Level</div>
+                    <div class="metric-value">
+                        {% if confidence_level %}
+                            {{ confidence_level|floatformat:0 }}%
+                        {% else %}
+                            95%
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="card mt-3">
+                    <div class="card-header">
+                        <h5 class="mb-0">Key Insights</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="insight-item positive">
+                            <strong>Growth Trend:</strong> Revenue expected to increase by 12.4% over the next 30 days compared to previous period.
+                        </div>
+                        <div class="insight-item">
+                            <strong>Seasonality:</strong> Normal seasonal pattern detected, with peak expected in week 3.
+                        </div>
+                        <div class="insight-item warning">
+                            <strong>Volatility Warning:</strong> Higher than usual variance in daily revenue forecasts (±8%).
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mb-4">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="mb-0">Forecast Summary Table</h4>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-striped forecast-summary-table">
+                        <thead>
+                            <tr>
+                                <th>Period</th>
+                                <th>Predicted Value</th>
+                                <th>Lower Bound</th>
+                                <th>Upper Bound</th>
+                                <th>Growth</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% if forecast_periods %}
+                                {% for period in forecast_periods %}
+                                <tr {% if period.is_30_day %}class="table-primary"{% endif %}>
+                                    <td><strong>{{ period.name }}</strong></td>
+                                    <td>${{ period.value|floatformat:0 }}</td>
+                                    <td>${{ period.lower_bound|floatformat:0 }}</td>
+                                    <td>${{ period.upper_bound|floatformat:0 }}</td>
+                                    <td class="{% if period.growth > 0 %}growth-positive{% elif period.growth < 0 %}growth-negative{% endif %}">
+                                        {% if period.growth > 0 %}+{% endif %}{{ period.growth|floatformat:1 }}%
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            {% else %}
+                                <!-- Placeholder data -->
+                                <tr class="table-primary">
+                                    <td><strong>Next 30 Days</strong></td>
+                                    <td>$128,500</td>
+                                    <td>$118,200</td>
+                                    <td>$138,800</td>
+                                    <td class="growth-positive">+12.4%</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>31-60 Days</strong></td>
+                                    <td>$135,200</td>
+                                    <td>$122,500</td>
+                                    <td>$147,900</td>
+                                    <td class="growth-positive">+5.2%</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>61-90 Days</strong></td>
+                                    <td>$142,800</td>
+                                    <td>$127,100</td>
+                                    <td>$158,500</td>
+                                    <td class="growth-positive">+5.6%</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Next Quarter (90 Days)</strong></td>
+                                    <td>$406,500</td>
+                                    <td>$367,800</td>
+                                    <td>$445,200</td>
+                                    <td class="growth-positive">+8.3%</td>
+                                </tr>
+                            {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mb-4">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="mb-0">Model Performance Metrics</h4>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <div class="metric-card">
+                            <div class="metric-label">MAPE (Mean Absolute Percentage Error)</div>
+                            <div class="metric-value">
+                                {% if model_metrics.mape %}
+                                    {{ model_metrics.mape|floatformat:2 }}%
+                                {% else %}
+                                    7.52%
+                                {% endif %}
+                            </div>
+                            <div class="metric-context">Lower is better</div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="metric-card">
+                            <div class="metric-label">R² Score</div>
+                            <div class="metric-value">
+                                {% if model_metrics.r2 %}
+                                    {{ model_metrics.r2|floatformat:2 }}
+                                {% else %}
+                                    0.86
+                                {% endif %}
+                            </div>
+                            <div class="metric-context">Higher is better (max 1.0)</div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="metric-card">
+                            <div class="metric-label">RMSE</div>
+                            <div class="metric-value">
+                                {% if model_metrics.rmse %}
+                                    {{ model_metrics.rmse|floatformat:2 }}
+                                {% else %}
+                                    4,215
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="metric-card">
+                            <div class="metric-label">Model Training Time</div>
+                            <div class="metric-value">
+                                {% if model_metrics.training_time %}
+                                    {{ model_metrics.training_time|floatformat:1 }}s
+                                {% else %}
+                                    2.4s
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="mb-0">Forecast Methodology</h4>
+            </div>
+            <div class="card-body">
+                <h5>Data Preparation</h5>
+                <p>This forecast is built using {{ days_of_historical_data|default:"180" }} days of historical data. The data undergoes the following pre-processing steps:</p>
+                <ul>
+                    <li>Outlier detection and treatment</li>
+                    <li>Missing value imputation</li>
+                    <li>Seasonality detection and adjustment</li>
+                    <li>Trend component extraction</li>
+                </ul>
+                
+                <h5>Model Selection</h5>
+                <p>The forecast is generated using {{ model_type|default:"Auto (Best Fit)" }} which was automatically selected based on performance during cross-validation. For this dataset, the model achieved:</p>
+                <ul>
+                    <li>High accuracy for 30-day forecasts (MAPE: {{ short_term_mape|default:"5.8" }}%)</li>
+                    <li>Good accuracy for 90-day forecasts (MAPE: {{ mid_term_mape|default:"8.3" }}%)</li>
+                    <li>Reasonable accuracy for longer forecasts (MAPE: {{ long_term_mape|default:"12.6" }}%)</li>
+                </ul>
+                
+                <p class="text-muted mt-3"><i class="fas fa-info-circle me-1"></i> The confidence intervals represent the range of values the actual results are likely to fall within, accounting for model uncertainty and natural variability in the data.</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Add event listener for horizon changes
+        const horizonSelect = document.getElementById('forecastHorizon');
+        if (horizonSelect) {
+            horizonSelect.addEventListener('change', function() {
+                // Highlight the 30-day option
+                if (this.value === '30') {
+                    this.classList.add('selected-horizon');
+                } else {
+                    this.classList.remove('selected-horizon');
+                }
+            });
+            
+            // Highlight the 30-day option on page load if selected
+            if (horizonSelect.value === '30') {
+                horizonSelect.classList.add('selected-horizon');
+            }
+        }
+        
+        // Add event listeners for forecast period options
+        const periodOptions = document.querySelectorAll('.forecast-period-option');
+        periodOptions.forEach(function(option) {
+            option.addEventListener('click', function() {
+                // Remove active class from all options
+                periodOptions.forEach(function(opt) {
+                    opt.classList.remove('active');
+                });
+                
+                // Add active class to clicked option
+                this.classList.add('active');
+                
+                // Update the forecast horizon in the form
+                const period = this.getAttribute('data-period');
+                if (horizonSelect) {
+                    horizonSelect.value = period;
+                    
+                    // Trigger change event to update styling
+                    const event = new Event('change');
+                    horizonSelect.dispatchEvent(event);
+                }
+                
+                // Optional: Auto-submit the form to update the forecast
+                // document.getElementById('forecastSettingsForm').submit();
+            });
+        });
+    });
+</script>
+{% endblock %} 
